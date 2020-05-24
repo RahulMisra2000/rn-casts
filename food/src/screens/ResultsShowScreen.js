@@ -10,24 +10,27 @@ const ResultsShowScreen = ({ navigation }) => {
     const response = await yelp.get(`/${id}`);
     setResult(response.data);
   };
+  
   useEffect(() => {
     getResult(id);
   }, []);
 
+  /* ****************************** Interesting DP (design pattern) - multiple returns ****************** */
   if (!result) {
     return null;
   }
 
+  /* ****************************** Interesting DP (design pattern) - multiple returns ****************** */
   return (
     <View>
-      <Text>{result.name}</Text>
-      <FlatList
-        data={result.photos}
-        keyExtractor={photo => photo}
-        renderItem={({ item }) => {
-          return <Image style={styles.image} source={{ uri: item }} />;
-        }}
-      />
+        <Text>{result.name}</Text>
+        <FlatList
+            data={result.photos}
+            keyExtractor={photo => photo}
+            renderItem={({ item }) => {
+              return <Image style={styles.image} source={{ uri: item }} />;
+            }}
+        />
     </View>
   );
 };
